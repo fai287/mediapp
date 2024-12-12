@@ -1,0 +1,70 @@
+{% extends 'starter-page.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<br><br><br><br>
+
+<!-- Appointments Table -->
+<table class="table table-info container">
+    <tr>
+        <th>name</th>
+        <th>email</th>
+        <th>phone</th>
+        <th>date</th>
+        <th>department</th>
+        <th>doctor</th>
+        <th>message</th>
+        <th>action</th>
+    </tr>
+
+    {% for x in appointments %}
+        <tr>
+            <td>{{ x.name }}</td>
+            <td>{{ x.email }}</td>
+            <td>{{ x.phone }}</td>
+            <td>{{ x.date }}</td>
+            <td>{{ x.department }}</td>
+            <td>{{ x.doctor }}</td>
+            <td>{{ x.message }}</td>
+            <td>
+                <a href="/edit{{ x.id }}" class="btn btn-primary">EDIT</a>
+                <a href="/delete/{{ x.id }}" class="btn btn-danger">DELETE</a>
+                <a href="{% url 'pay' %}" class="btn btn-success">PAY</a>
+            </td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="7">No appointments found.</td></tr>
+    {% endfor %}
+</table>
+
+<!-- Contacts Table -->
+<br><br>
+<h3>Contacts</h3>
+<table class="table table-success container">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Action</th>
+    </tr>
+
+    {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.subject }}</td>
+            <td>{{ contact.message }}</td>
+            <td>
+                <a href="" class="btn btn-primary">VIEW</a>
+                <a href="/delete/{{ contact.id }}" class="btn btn-danger">DELETE</a>
+            </td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="5">No contacts found.</td></tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
